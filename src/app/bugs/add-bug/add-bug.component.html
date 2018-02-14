@@ -1,0 +1,50 @@
+
+ <div class="ui main container">
+   <div class="row">
+    <h1 class="ui header teal">Add a bug</h1>
+ </div>
+
+    <form novalidate (ngSubmit)="save()" [formGroup]="addBugForm" class="ui form">
+      <div class="field" [ngClass]="{'error':addBugForm.get('title').touched && addBugForm.get('title').invalid}">
+          <label>Title ( {{250 - addBugForm.get('title').value.length}} )</label>
+          <input type="text" placeholder="title" formControlName="title"/>
+          <div class="ui pointing red basic label" *ngIf="addBugForm.get('title').touched && addBugForm.get('title').errors && addBugForm.get('title').errors.maxlength">
+              max length reached
+          </div>
+        </div>
+      
+      <div class="field" [ngClass]="{'error':addBugForm.get('title').touched && addBugForm.get('title').invalid}">
+          <label>Body</label>        
+          <textarea rows="2" placeholder="body" formControlName="body"></textarea>
+      </div>
+      <div class="field" [ngClass]="{'error':addBugForm.get('title').touched && addBugForm.get('title').invalid}">
+          <label>Steps to reproduce</label>
+          <textarea rows="2" placeholder="steps to reproduce" formControlName="stepsToReproduce"></textarea>
+        </div>
+
+      
+      <div class="ui toggle checkbox">             
+              <input type="checkbox"  formControlName="isFixed"/>
+              <label>Fixed</label>
+      </div>
+     
+        <div class="field">
+            <label>Severity</label>
+            <select class="ui dropdown" formControlName="severity">
+              <option value="">Select</option>
+              <option value="1"><i class="circle large icon normal"></i> Normal</option>
+              <option value="2"><i class="circle large icon critical"></i> Critical</option>
+              <option value="3"><i class="circle large icon fatal"></i> Fatal</option>
+            </select>
+        </div>
+
+        <div class="ui right aligned row">
+            <button class="ui button green pull right" type="submit" [disabled]="addBugForm.invalid">save</button>
+        </div>
+      
+    </form>
+  </div>
+
+<a class="ui button" [routerLink]="['/bugs']">
+  <i class="angle double left icon"></i>Back
+</a>

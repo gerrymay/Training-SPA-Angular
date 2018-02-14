@@ -1,0 +1,34 @@
+
+<div class="ui main container">
+
+  <button class="ui basic button right">
+    <!--addBug-->
+    <i class = "add icon circle" [routerLink]="['/addBug']"></i>
+    Add a bug
+  </button>
+
+<table class="ui celled table">
+    <thead>
+      <tr>
+        <th>Editar</th>
+        <th>Title</th>
+        <th>Creado</th>
+        <th>Severity</th>
+        <th>Fixed</th>
+      </tr>
+    </thead>
+
+    <tbody  >     
+      <tr *ngFor = "let bug of bugs">
+        <td><a [routerLink]="['/editBug', bug.id]">  {{bug.id}} </a> </td>
+        <td>{{bug.title}}</td>
+        <td>{{bug.createdAt }}</td>
+        <td> <app-severity [severityRange]='bug.severity'></app-severity> </td>
+        <td>
+          <i [ngClass]="{'green checkmark':bug.isFixed, 'red remove':!bug.isFixed}" class="large icon"></i>
+        </td>
+      </tr>
+    
+    </tbody>
+  </table>
+</div>
